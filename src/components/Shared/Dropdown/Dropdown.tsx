@@ -5,7 +5,7 @@ import ImagePart from "../ImagePart/ImagePart";
 interface DropdownProps {
         id: string;
         selectedValue: string;
-        onChange: (value: any) => void;
+        onChange: (value: string) => void;
         options: Languages[];
         menuDirection: string;
 }
@@ -14,7 +14,7 @@ export default function Dropdown(props: DropdownProps) {
         const dropdownPositionClass =
                 props.menuDirection === 'up'
                         ? 'top-0 translate-y-[-100%]'
-                        : 'top-full translate-y-0';
+                        : 'top-16 translate-y-0';
         return (
                 <div className="relative">
                         <button
@@ -36,17 +36,21 @@ export default function Dropdown(props: DropdownProps) {
                                 </div>
                         </button>
                         {isDropdownOpen && (
-                                <div className={`absolute z-10 ${dropdownPositionClass} w-full bg-white shadow-lg rounded-md`}>
+                                <div className={`absolute z-10 border border-black rounded-full ${dropdownPositionClass} w-full bg-white shadow-lg rounded-md`}>
                                         {props.options.map((option) => (
                                                 <div
                                                         key={option.id}
-                                                        className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                                                        className={`px-6 flex justify-between rounded-full py-2 my-3 mx-3 text-sm text-gray-700 ${props.selectedValue === option.label ? 'bg-gray-200' : 'hover:bg-gray-100'} cursor-pointer`}
                                                         onClick={() => {
                                                                 props.onChange(option.label);
                                                                 setIsDropdownOpen(false);
                                                         }}
                                                 >
-                                                        {option.label}
+                                                        <div className="flex items-center">
+                                                                {props.id === "engine-dropdown" && option.icon && <ImagePart src={option.icon} width={24} height={24} className="mr-2" />}
+                                                                {option.label}
+                                                        </div>
+                                                        {props.id === "language-dropdown" && props.selectedValue === option.label ? <ImagePart src='img/icon/tick.svg' width={20} height={20} className="mr-2" /> : null}
                                                 </div>
                                         ))}
                                 </div>

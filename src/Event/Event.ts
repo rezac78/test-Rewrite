@@ -5,6 +5,8 @@ import Images from "../../public/img/icon/camera.svg";
 import Translate from "../../public/img/icon/language.svg";
 import Grammar from "../../public/img/icon/text-grammar 1.svg";
 import Code from "../../public/img/icon/code.svg";
+import GPT3 from "../../public/img/icon/Avatar ChatGPT.svg";
+import GPT4 from "../../public/img/icon/Avatar ChatGPT (1).svg";
 
 export interface NavbarIcons {
   id: number;
@@ -16,6 +18,12 @@ export interface LanguageDrops {
   id: number;
   label: string;
   code: string;
+}
+export interface EngineDrops {
+  id: number;
+  label: string;
+  code: string;
+  icon: any;
 }
 export const navbarIcons: NavbarIcons[] = [
   { id: 1, name: "Dashboard", icon: Dashboard, Link: "#" },
@@ -32,8 +40,8 @@ export const LanguageDrop: LanguageDrops[] = [
   { id: 3, label: "Français", code: "Français" },
 ];
 
-export const EngineDrop: LanguageDrops[] = [
-  { id: 1, label: "Engine 1", code: "1" },
-  { id: 2, label: "Engine 2", code: "2" },
-  { id: 3, label: "Engine 3", code: "3" },
+export const EngineDrop: EngineDrops[] = [
+  { id: 1, label: "GPT-3.5", code: "GPT-3.5", icon: GPT3 },
+  { id: 2, label: "GPT-4", code: "GPT-4", icon: GPT4 },
+  { id: 3, label: "Lorem", code: "Lorem", icon: GPT4 },
 ];
