@@ -27,7 +27,13 @@ export const navbarIcons: NavbarIcons[] = [
   { id: 7, name: "Code", icon: Code, Link: "#" },
 ];
 export const LanguageDrop: LanguageDrops[] = [
-  { id: 1, label: "English", code: "en" },
-  { id: 2, label: "Español", code: "es" },
-  { id: 3, label: "Français", code: "fr" },
+  { id: 1, label: "English", code: "English" },
+  { id: 2, label: "Español", code: "Español" },
+  { id: 3, label: "Français", code: "Français" },
+];
+
+export const EngineDrop: LanguageDrops[] = [
+  { id: 1, label: "Engine 1", code: "1" },
+  { id: 2, label: "Engine 2", code: "2" },
+  { id: 3, label: "Engine 3", code: "3" },
 ];
