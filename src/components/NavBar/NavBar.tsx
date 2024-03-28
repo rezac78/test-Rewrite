@@ -5,7 +5,7 @@ import ImagePart from '../Shared/ImagePart/ImagePart';
 export default function NavBar() {
         const [activeId, setActiveId] = useState('ReWrite');
         return (
-                <div className="flex flex-col h-screen bg-custom-gray text-white border-r border-gray-200">
+                <div className="flex flex-col bg-custom-gray text-white border-r border-gray-200">
                         <div className="flex flex-col flex-1">
                                 <div className="flex p-5">
                                         <ImagePart src="img/brand-openai.svg" width={44} height={44} />
