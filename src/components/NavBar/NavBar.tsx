@@ -31,8 +31,8 @@ export default function NavBar() {
                                                         <span className="text-gray-500 font-dm font-normal text-xs leading-4 text-left">Lorem</span>
                                                 </div>
                                         </div>
-                                        <div className="flex items-center ml-2">
-                                                <ImagePart src="img/icon/bell.svg" width={24} height={24} className="mr-4" />
+                                        <div className="flex items-center ml-4">
+                                                <ImagePart src="img/icon/bell.svg" width={24} height={24} className="mr-2" />
                                                 <ImagePart src="img/icon/info.svg" width={24} height={24} />
                                         </div>
                                 </div>

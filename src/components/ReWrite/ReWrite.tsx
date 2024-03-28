@@ -7,13 +7,24 @@ import Dropdown from '../Shared/Dropdown/Dropdown';
 import ToggleButton from '../Shared/ToggleButton/ToggleButton';
 import AdvanceOptions from '../AdvanceOptions/AdvanceOptions';
 import ButtonPart from '../Shared/ButtonPart/ButtonPart';
+import { WriteText } from '@/services/Service';
 export default function ReWrite() {
         const [text, setText] = useState('');
+        const [translatedCode, setTranslatedCode] = useState('');
         const characterLimit = 200;
         const [selectedLanguage, setSelectedLanguage] = useState('English');
         const [isEnabled, setIsEnabled] = useState(false);
         const toggleEnabled = () => setIsEnabled(!isEnabled);
         const [selectedEngine, setSelectedEngine] = useState('Engine 1');
+        const handleSendForm = async () => {
+                try {
+                        const response = await WriteText(text);
+                        setTranslatedCode(response)
+                } catch (error) {
+                        console.error("Translation failed:", error);
+                } finally {
+                }
+        };
         return (
                 <div className="flex-1 overflow-auto bg-custom-gray border-r border-gray-200 md:w-2/4">
                         <div className="flex items-center space-x-2 px-8 py-5">
@@ -57,9 +68,13 @@ export default function ReWrite() {
                                                         menuDirection="up"
                                                 />
                                         </div>
-                                        <ButtonPart IdName="Rewrite" className="bg-custom-purple text-white font-bold py-3 px-6 rounded-md text-lg w-11/12 ">Rewrite</ButtonPart>
+                                        <ButtonPart Click={handleSendForm} IdName="Rewrite" className="bg-custom-purple text-white font-bold py-3 px-6 rounded-md text-lg w-11/12 ">Rewrite</ButtonPart>
                                 </div>
                         </div>
+                        {/* <div>
+                                <h1>Python Script Display</h1>
+                                <pre><code>{translatedCode}</code></pre>
+                        </div> */}
                 </div>
         );
 };

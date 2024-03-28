@@ -9,9 +9,10 @@ export default function MainPart() {
         const toggleHistoryWindow = () => {
                 setHistoryVisible(!isHistoryVisible);
         };
+        
         return (
                 <div className="flex flex-col flex-1">
-                        <NavbarDash onClick={toggleHistoryWindow} />
+                        <NavbarDash isHistoryVisible={isHistoryVisible} onClick={toggleHistoryWindow} />
                         <ReWrite />
                         <HistoryWindow
                                 isVisible={isHistoryVisible}

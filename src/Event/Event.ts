@@ -7,6 +7,9 @@ import Grammar from "../../public/img/icon/text-grammar 1.svg";
 import Code from "../../public/img/icon/code.svg";
 import GPT3 from "../../public/img/icon/Avatar ChatGPT.svg";
 import GPT4 from "../../public/img/icon/Avatar ChatGPT (1).svg";
+import Pin from "../../public/img/icon/pin.svg";
+import Save from "../../public/img/icon/save.svg";
+import Trash from "../../public/img/icon/trash.svg";
 
 export interface NavbarIcons {
   id: number;
@@ -160,4 +163,9 @@ export const historyData: HistoryData[] = [
     timestamp: "45 Min ago",
     description: "English",
   },
+];
+export const HistoryWindowIcons: NavbarIcons[] = [
+  { id: 1, name: "pin", icon: Pin, Link: "#" },
+  { id: 2, name: "save", icon: Save, Link: "#" },
+  { id: 3, name: "trash", icon: Trash, Link: "#" },
 ];
