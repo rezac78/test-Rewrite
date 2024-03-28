@@ -6,6 +6,7 @@ import TextArea from '../Shared/TextArea/TextArea';
 import Dropdown from '../Shared/Dropdown/Dropdown';
 import ToggleButton from '../Shared/ToggleButton/ToggleButton';
 import AdvanceOptions from '../AdvanceOptions/AdvanceOptions';
+import ButtonPart from '../Shared/ButtonPart/ButtonPart';
 export default function ReWrite() {
         const [text, setText] = useState('');
         const characterLimit = 200;
@@ -16,7 +17,7 @@ export default function ReWrite() {
         return (
                 <div className="flex-1 overflow-auto bg-custom-gray border-r border-gray-200 md:w-2/4">
                         <div className="flex items-center space-x-2 px-8 py-5">
-                                <ImagePart src="img/icon/writing.svg" width={40} height={40} />
+                                <ImagePart src="img/icon/writing.svg" className="gray-filter" width={40} height={40} />
                                 <h1 className="font-sans text-2xl font-medium leading-tight text-left">ReWrite</h1>
                         </div>
                         <div className="border-b border-gray-200"></div>
@@ -56,9 +57,7 @@ export default function ReWrite() {
                                                         menuDirection="up"
                                                 />
                                         </div>
-                                        <button className="bg-custom-purple text-white font-bold py-3 px-6 rounded-md text-lg w-11/12 ">
-                                                Rewrite
-                                        </button>
+                                        <ButtonPart IdName="Rewrite" className="bg-custom-purple text-white font-bold py-3 px-6 rounded-md text-lg w-11/12 ">Rewrite</ButtonPart>
                                 </div>
                         </div>
                 </div>

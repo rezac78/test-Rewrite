@@ -10,3 +10,6 @@
   background-clip: text;
   display: inline-block;
 }
+.gray-filter {
+  filter: grayscale(100%);
+}

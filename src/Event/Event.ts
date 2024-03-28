@@ -33,6 +33,12 @@ export interface AdvanceOptions {
   selected: string;
   setSelected: any;
 }
+export interface HistoryData {
+  id: number;
+  content: string;
+  timestamp: string;
+  description: string;
+}
 export const navbarIcons: NavbarIcons[] = [
   { id: 1, name: "Dashboard", icon: Dashboard, Link: "#" },
   { id: 2, name: "Chat", icon: Chat, Link: "#" },
@@ -115,5 +121,43 @@ export const Options: AdvanceOptions[] = [
     Data: PointDrop,
     selected: "selectedPoint",
     setSelected: "setSelectedPoint",
+  },
+];
+export const historyData: HistoryData[] = [
+  {
+    id: 1,
+    content: "Lorem ipsum dolor amet...",
+    timestamp: "50 Min ago",
+    description: "English",
+  },
+  {
+    id: 2,
+    content: "Sed do eiusmod tempor...",
+    timestamp: "45 Min ago",
+    description: "English",
+  },
+  {
+    id: 3,
+    content: "Lorem ipsum dolor amet...",
+    timestamp: "50 Min ago",
+    description: "English",
+  },
+  {
+    id: 4,
+    content: "Sed do eiusmod tempor...",
+    timestamp: "45 Min ago",
+    description: "English",
+  },
+  {
+    id: 5,
+    content: "Lorem ipsum dolor amet...",
+    timestamp: "50 Min ago",
+    description: "English",
+  },
+  {
+    id: 6,
+    content: "Sed do eiusmod tempor...",
+    timestamp: "45 Min ago",
+    description: "English",
   },
 ];
