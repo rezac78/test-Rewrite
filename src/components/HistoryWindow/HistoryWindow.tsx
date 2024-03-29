@@ -2,7 +2,6 @@ import { historyData, HistoryWindowIcons } from "@/Event/Event";
 import ImagePart from "../Shared/ImagePart/ImagePart";
 import SearchPart from "../Shared/SearchPart/SearchPart";
 import ButtonPart from "../Shared/ButtonPart/ButtonPart";
-
 interface HistoryWindowProps {
         isVisible: boolean;
         onClose: any;

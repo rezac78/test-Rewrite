@@ -1,8 +1,6 @@
-"use client"
 import ReWrite from "@/components/ReWrite/ReWrite";
 import NavbarDash from "@/components/Shared/NavbarDash/NavbarDash";
 import { useState } from "react";
-import HistoryWindow from "../HistoryWindow/HistoryWindow";
 import CodeConsole from "../CodeConsole/CodeConsole";
 interface MainPartProps {
         toggleHistoryWindow: (value: string) => void;
@@ -10,7 +8,6 @@ interface MainPartProps {
 }
 export default function MainPart(props: MainPartProps) {
         const [script, setScript] = useState('');
-
         return (
                 <div className="flex flex-col flex-1">
                         <NavbarDash isHistoryVisible={props.isHistoryVisible} onClick={props.toggleHistoryWindow} />

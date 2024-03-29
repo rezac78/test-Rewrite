@@ -1,4 +1,3 @@
-"use client"
 import React, { useState } from 'react';
 import { navbarIcons } from '@/Event/Event';
 import ImagePart from '../Shared/ImagePart/ImagePart';

@@ -1,10 +1,14 @@
 import axios from "../utils/axiosInstance";
 export const WriteText = async (
-  text: string
-  // active: string,
-  // activeFormat: string,
-  // SelectLan: string
+  text: string,
+  selectedLanguage: string,
+  tone?: string,
+  creativity?: string,
+  pointOfView?: string,
+  lengthDescription?: string
 ) => {
+  const prompt = `Write a ${lengthDescription} response in ${selectedLanguage}, with a ${tone} tone, and a ${creativity} level of creativity, from a ${pointOfView} point of view.\n\n${text}`;
+
   const requestBody = {
     model: "deepseek-coder",
     stream: true,
@@ -16,11 +20,12 @@ export const WriteText = async (
     messages: [
       {
         role: "system",
-        content: `You are a helpful assistant`,
+        content: `You are a helpful assistant.`,
       },
-      { role: "user", content: "```" + text + "```" },
+      { role: "user", content: "```" + prompt + "```" },
     ],
   };
+
   try {
     const response = await axios.post("/chat/completions", requestBody, {
       headers: {
@@ -30,6 +35,7 @@ export const WriteText = async (
     });
     return response.data;
   } catch (error: any) {
-    return error.response;
+    console.error("Error during API call:", error.message || error);
+    return error.response ? error.response : { error };
   }
 };

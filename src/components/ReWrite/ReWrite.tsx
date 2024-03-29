@@ -1,5 +1,4 @@
-"use client"
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ImagePart from '../Shared/ImagePart/ImagePart';
 import { LanguageDrop, EngineDrop } from '@/Event/Event';
 import TextArea from '../Shared/TextArea/TextArea';
@@ -13,15 +12,14 @@ interface SelectedOptionsType {
 }
 const initialState: SelectedOptionsType = {
         selectedLeng: 'Auto',
-        selectedVoice: 'Auto',
-        selectedCreativity: 'Repetitive',
+        selectedVoice: 'Professional',
+        selectedCreativity: 'Original',
         selectedPoint: 'Default',
 };
 interface ReWriteProps {
         setScript: (value: string) => void;
 }
 export default function ReWrite(props: ReWriteProps) {
-
         const [text, setText] = useState('');
         const characterLimit = 200;
         const [selectedLanguage, setSelectedLanguage] = useState('English');
@@ -31,7 +29,7 @@ export default function ReWrite(props: ReWriteProps) {
         const [selectedOptions, setSelectedOptions] = useState<SelectedOptionsType>(initialState);
         const handleSendForm = async () => {
                 try {
-                        const data = await WriteText(text);
+                        const data = await WriteText(text, selectedLanguage, selectedOptions.selectedVoice, selectedOptions.selectedCreativity, selectedOptions.selectedPoint, selectedOptions.selectedLeng);
                         let allDeltaContents: any[] = [];
                         const rawJsonStrings = data.split('data:').filter((str: string) => str.trim());
                         rawJsonStrings.forEach((rawJson: string) => {
@@ -51,6 +49,7 @@ export default function ReWrite(props: ReWriteProps) {
                                 }
                         });
                         const finalContent = allDeltaContents.join(' ');
+                        console.log(finalContent)
                         props.setScript(finalContent);
                 } catch (error) {
                         console.error('Error handling form submission:', error);

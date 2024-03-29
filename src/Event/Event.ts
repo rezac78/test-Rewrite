@@ -71,7 +71,7 @@ export const LenghDrop: LanguageDrops[] = [
 ];
 
 export const VoiceDrop: LanguageDrops[] = [
-  { id: 1, label: "Auto", code: "Auto" },
+  { id: 1, label: "Professional", code: "Professional" },
   { id: 2, label: "Amicable", code: "Amicable" },
   { id: 3, label: "Casual", code: "Casual" },
   { id: 4, label: "Friendly", code: "Friendly" },

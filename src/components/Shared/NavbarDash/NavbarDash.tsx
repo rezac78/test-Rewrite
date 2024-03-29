@@ -1,4 +1,3 @@
-"use client"
 import React from 'react';
 import ImagePart from '../ImagePart/ImagePart';
 import ButtonPart from '../ButtonPart/ButtonPart';
