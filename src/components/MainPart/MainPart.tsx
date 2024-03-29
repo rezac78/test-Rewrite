@@ -4,25 +4,20 @@ import NavbarDash from "@/components/Shared/NavbarDash/NavbarDash";
 import { useState } from "react";
 import HistoryWindow from "../HistoryWindow/HistoryWindow";
 import CodeConsole from "../CodeConsole/CodeConsole";
-
-export default function MainPart() {
-        const [isHistoryVisible, setHistoryVisible] = useState(false);
-        const toggleHistoryWindow = () => {
-                setHistoryVisible(!isHistoryVisible);
-        };
+interface MainPartProps {
+        toggleHistoryWindow: (value: string) => void;
+        isHistoryVisible: boolean;
+}
+export default function MainPart(props: MainPartProps) {
         const [script, setScript] = useState('');
 
         return (
                 <div className="flex flex-col flex-1">
-                        <NavbarDash isHistoryVisible={isHistoryVisible} onClick={toggleHistoryWindow} />
+                        <NavbarDash isHistoryVisible={props.isHistoryVisible} onClick={props.toggleHistoryWindow} />
                         <div className="flex flex-1 ">
                                 <ReWrite setScript={setScript} />
                                 <CodeConsole script={script} />
                         </div>
-                        <HistoryWindow
-                                isVisible={isHistoryVisible}
-                                onClose={() => setHistoryVisible(false)}
-                        />
                 </div>
         );
 }

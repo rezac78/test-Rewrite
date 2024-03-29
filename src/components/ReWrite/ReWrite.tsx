@@ -8,7 +8,6 @@ import ToggleButton from '../Shared/ToggleButton/ToggleButton';
 import AdvanceOptions from '../AdvanceOptions/AdvanceOptions';
 import ButtonPart from '../Shared/ButtonPart/ButtonPart';
 import { WriteText } from '@/services/Service';
-import CodeConsole from '../CodeConsole/CodeConsole';
 interface SelectedOptionsType {
         [key: string]: string;
 }

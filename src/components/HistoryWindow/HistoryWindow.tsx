@@ -12,7 +12,7 @@ export default function HistoryWindow(props: HistoryWindowProps) {
                 return null;
         }
         return (
-                <div className="flex flex-col absolute inset-y-0 top-20 right-0 bg-[#F8F8F8] p-6 h-auto	 overflow-y-auto w-1/6 min-w-[300px] z-50">
+                <div className="absolute top-20 inset-y-0 right-0 bg-[#F8F8F8] p-6 min-w-[300px] w-1/6 z-50 overflow-y-auto">
                         <div className="flex justify-between items-center">
                                 <SearchPart className="relative flex-grow" />
                                 <button className="pl-2" onClick={props.onClose}>
