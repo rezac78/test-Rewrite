@@ -1,0 +1,25 @@
+Overview
+The application is structured around a primary Home component that serves as the landing page. It integrates a navigation bar (NavBar) and a main content area (MainPart), showcasing a responsive layout conducive to both desktop and mobile viewing.
+
+Home Component
+The Home component is the entry point of the application. It utilizes a flexible layout to arrange the NavBar and MainPart components side by side on larger screens and vertically stacked on smaller screens.
+
+NavBar Component
+The NavBar component presents a vertical navigation menu, featuring a brand logo and dynamically generated navigation links. It supports active state management, highlighting the currently active section.
+
+ImagePart Component
+ImagePart is a reusable component for displaying images. It leverages the Next.js Image component for optimized image loading.
+
+MainPart Component
+MainPart serves as the container for the main content of the application. It includes a dashboard navbar, a rewrite component for text manipulation, and an optional history window for viewing past operations.
+
+AdvanceOptions and Dropdown Components
+These components provide advanced user interaction capabilities, such as selecting options from a dropdown. They are used within the main part of the application to configure various settings.
+
+Axios Service
+The application integrates an Axios instance for handling API requests. This service is utilized by the WriteText function to interact with a backend service, sending user input and receiving processed data.
+
+Styling and Interactivity
+The application employs Tailwind CSS for styling, facilitating a modern and responsive design. JavaScript and React state management are used to handle user interactions, such as selecting navigation items, toggling advanced options, and submitting forms.
+
+

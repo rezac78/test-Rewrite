@@ -1,21 +1,12 @@
-import { useState } from "react";
 import Dropdown from "../Shared/Dropdown/Dropdown";
 import { Options } from '@/Event/Event';
-
-interface SelectedOptionsType {
-        [key: string]: string;
+interface AdvanceOptionsProps {
+        setSelectedOptions: any;
+        selectedOptions: any;
 }
-
-const initialState: SelectedOptionsType = {
-        selectedLeng: 'Auto',
-        selectedVoice: 'Auto',
-        selectedCreativity: 'Repetitive',
-        selectedPoint: 'Default',
-};
-export default function AdvanceOptions() {
-        const [selectedOptions, setSelectedOptions] = useState<SelectedOptionsType>(initialState);
+export default function AdvanceOptions(props: AdvanceOptionsProps) {
         const handleChange = (optionId: string, newValue: string) => {
-                setSelectedOptions((prev) => ({
+                props.setSelectedOptions((prev: any) => ({
                         ...prev,
                         [optionId]: newValue,
                 }));
@@ -31,7 +22,7 @@ export default function AdvanceOptions() {
                                                 <Dropdown
                                                         id={e.NameId}
                                                         options={e.Data}
-                                                        selectedValue={selectedOptions[e.selected]}
+                                                        selectedValue={props.selectedOptions[e.selected]}
                                                         onChange={(newValue) => handleChange(e.selected, newValue)}
                                                         menuDirection="up"
                                                 />

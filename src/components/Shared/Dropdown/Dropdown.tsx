@@ -24,7 +24,7 @@ export default function Dropdown(props: DropdownProps) {
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                         >
                                 <div className="flex items-center">
-                                        <span className="ml-2">{props.selectedValue}</span>
+                                        <span className="ml-2 text-sm lg:text-base ">{props.selectedValue}</span>
                                 </div>
                                 <div className="flex items-center px-3">
                                         {props.id === "engine-dropdown" && <ImagePart src="img/icon/settings.svg" width={24} height={24} />}
@@ -50,7 +50,7 @@ export default function Dropdown(props: DropdownProps) {
                                                 >
                                                         <div className="flex items-center">
                                                                 {props.id === "engine-dropdown" && option.icon && <ImagePart src={option.icon} width={24} height={24} className="mr-2" />}
-                                                                {option.label}
+                                                                <span className="text-base">{option.label}</span>
                                                         </div>
                                                         {props.selectedValue === option.label ? <ImagePart src='img/icon/tick.svg' width={20} height={20} className="mr-2" /> : null}
                                                 </div>

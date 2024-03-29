@@ -2,5 +2,11 @@ export interface Languages {
   id: number;
   label: string;
   code: string;
-  icon?:any
+  icon?: any;
+}
+export interface Languages {
+  id: number;
+  label: string;
+  code: string;
+  icon?: any;
 }
