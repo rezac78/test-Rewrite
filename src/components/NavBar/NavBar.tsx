@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { navbarIcons } from '@/Event/Event';
 import ImagePart from '../Shared/ImagePart/ImagePart';
-export default function NavBar() {
+interface NavBarProps {
+}
+export default function NavBar(props: NavBarProps) {
         const [activeId, setActiveId] = useState('ReWrite');
         return (
                 <div className="flex flex-col bg-custom-gray text-white border-r border-gray-200">

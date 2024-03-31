@@ -9,6 +9,7 @@ interface DropdownProps {
         onChange: (value: string) => void;
         options: Languages[];
         menuDirection: string;
+        isShortViewport?: boolean;
 }
 export default function Dropdown(props: DropdownProps) {
         const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -20,7 +21,7 @@ export default function Dropdown(props: DropdownProps) {
                 <div className="relative">
                         <button
                                 id={props.id}
-                                className="flex items-center justify-between bg-gray-200 text-gray-700 py-3 rounded-md text-lg w-full"
+                                className={`flex items-center justify-between bg-gray-200 text-gray-700 ${props.isShortViewport ? "py-2.5" : "py-3"} rounded-md text-lg w-full`}
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                         >
                                 <div className="flex items-center">
@@ -52,7 +53,7 @@ export default function Dropdown(props: DropdownProps) {
                                                                 {props.id === "engine-dropdown" && option.icon && <ImagePart src={option.icon} width={24} height={24} className="mr-2" />}
                                                                 <span className="text-base">{option.label}</span>
                                                         </div>
-                                                        {props.selectedValue === option.label ? <ImagePart src='img/icon/tick.svg' width={20} height={20} className="mr-2" /> : null}
+                                                        {props.selectedValue === option.label ? <ImagePart src='img/icon/tick.svg' width={14} height={14} className="mr-0" /> : null}
                                                 </div>
                                         ))}
                                 </div>

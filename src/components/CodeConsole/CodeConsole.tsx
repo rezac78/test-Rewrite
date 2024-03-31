@@ -21,11 +21,11 @@ export default function CodeConsole({ script }: { script: string }) {
   });
 
   const renderCodeBlock = (part: string, language: string) => (
-    <div className="bg-gray-900 my-5 rounded-lg">
+    <div className="bg-gray-900 my-5 rounded-lg max-h-[80vh] overflow-y-auto">
       <div className="bg-gray-700 py-2 rounded-t-lg">
         <div className="flex justify-between px-3">
           <strong className="text-white">{language}</strong>
-          <span className="text-white">copy</span>
+          <span className="text-white cursor-pointer">copy</span>
         </div>
       </div>
       <div className="px-3 py-4">
@@ -52,8 +52,8 @@ export default function CodeConsole({ script }: { script: string }) {
     return renderCodeBlock(restOfText, language);
   });
 
-  return <div className="flex justify-center items-center w-2/4">
-    <div className="w-full max-w-4xl mx-auto p-4">
+  return <div className="flex flex-col flex-1 justify-center items-center w-full md:w-2/4 h-[80vh]">
+    <div className="w-full flex-none max-w-4xl mx-auto overflow-y-auto px-5" style={{ maxHeight: '80vh' }}>
       {renderText(script)}
     </div>
   </div>;

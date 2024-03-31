@@ -1,7 +1,7 @@
 import React from 'react';
 import ImagePart from '../ImagePart/ImagePart';
 import ButtonPart from '../ButtonPart/ButtonPart';
-export default function NavbarDash({ onClick, isHistoryVisible }: any) {
+export default function NavbarDash({ onClick, isHistoryVisible, isShortViewport }: any) {
         return (
                 <>
                         <div className="flex justify-between items-center p-5 bg-custom-gray">

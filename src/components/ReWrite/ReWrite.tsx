@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ImagePart from '../Shared/ImagePart/ImagePart';
 import { LanguageDrop, EngineDrop } from '@/Event/Event';
 import TextArea from '../Shared/TextArea/TextArea';
@@ -18,6 +18,7 @@ const initialState: SelectedOptionsType = {
 };
 interface ReWriteProps {
         setScript: (value: string) => void;
+        isShortViewport: boolean;
 }
 export default function ReWrite(props: ReWriteProps) {
         const [text, setText] = useState('');
@@ -27,6 +28,7 @@ export default function ReWrite(props: ReWriteProps) {
         const toggleEnabled = () => setIsEnabled(!isEnabled);
         const [selectedEngine, setSelectedEngine] = useState('GPT-3.5');
         const [selectedOptions, setSelectedOptions] = useState<SelectedOptionsType>(initialState);
+
         const handleSendForm = async () => {
                 try {
                         const data = await WriteText(text, selectedLanguage, selectedOptions.selectedVoice, selectedOptions.selectedCreativity, selectedOptions.selectedPoint, selectedOptions.selectedLeng);
@@ -49,27 +51,21 @@ export default function ReWrite(props: ReWriteProps) {
                                 }
                         });
                         const finalContent = allDeltaContents.join(' ');
-                        console.log(finalContent)
                         props.setScript(finalContent);
                 } catch (error) {
                         console.error('Error handling form submission:', error);
                 }
         };
         return (
-
-                <div className="flex-1 overflow-auto bg-custom-gray border-r border-gray-200 w-2/4">
-                        <div className="flex items-center space-x-2 px-8 py-5">
-                                <ImagePart src="img/icon/writing.svg" className="gray-filter" width={40} height={40} />
-                                <h1 className="font-sans text-2xl font-medium leading-tight text-left">ReWrite</h1>
-                        </div>
+                <div className="flex flex-col flex-1 bg-custom-gray border-r border-gray-200 w-2/4">
                         <div className="border-b border-gray-200"></div>
-                        <div className="px-8 pt-8">
-                                <TextArea label="Target Text" Value={text} setValue={setText} characterLimit={characterLimit} />
+                        <div className="flex-none px-6 py-4">
+                                <TextArea isShortViewport={props.isShortViewport} label="Target Text" Value={text} setValue={setText} characterLimit={characterLimit} />
                                 <div className="text-sm text-gray-500">
                                         {text.length}/{characterLimit}
                                 </div>
                         </div>
-                        <div className="p-8">
+                        <div className="flex-none px-6 ">
                                 <label className="block mb-2 font-medium text-sm leading-5 text-custom-dark">
                                         Language
                                 </label>
@@ -81,25 +77,31 @@ export default function ReWrite(props: ReWriteProps) {
                                         menuDirection="down"
                                 />
                         </div>
-                        <div className="p-8">
-                                <ToggleButton isEnabled={isEnabled} toggleEnabled={toggleEnabled} />
+                        <div className="flex-none px-6 py-2">
+                                <ToggleButton isShortViewport={props.isShortViewport}
+                                        isEnabled={isEnabled} toggleEnabled={toggleEnabled} />
                         </div>
-                        {isEnabled ? <AdvanceOptions selectedOptions={selectedOptions} setSelectedOptions={setSelectedOptions} /> : null}
-                        <div className="p-8">
-                                <label className="block mb-2 font-medium text-sm leading-5 text-custom-dark">
-                                        Engine
-                                </label>
-                                <div className="flex flex-col sm:flex-row items-center  space-y-4 sm:space-y-0 sm:space-x-4">
-                                        <div className="w-11/12">
-                                                <Dropdown
-                                                        id="engine-dropdown"
-                                                        options={EngineDrop}
-                                                        selectedValue={selectedEngine}
-                                                        onChange={(newValue) => setSelectedEngine(newValue)}
-                                                        menuDirection="up"
-                                                />
+                        {isEnabled ? <div className="flex-none px-6 py-2">
+                                <AdvanceOptions isShortViewport={props.isShortViewport} selectedOptions={selectedOptions} setSelectedOptions={setSelectedOptions} />
+                        </div> : null}
+                        <div className={`${isEnabled ? "mt-auto" : ""}`}>
+                                <div className='flex-none px-6 py-2'>
+                                        <label className="block mb-2 font-medium text-sm leading-5 text-custom-dark">
+                                                Engine
+                                        </label>
+                                        <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                                                <div className="w-11/12">
+                                                        <Dropdown
+                                                                id="engine-dropdown"
+                                                                options={EngineDrop}
+                                                                selectedValue={selectedEngine}
+                                                                onChange={(newValue) => setSelectedEngine(newValue)}
+                                                                menuDirection="up"
+                                                                isShortViewport={props.isShortViewport}
+                                                        />
+                                                </div>
+                                                <ButtonPart Click={handleSendForm} IdName="Rewrite" className={`bg-custom-purple text-white font-bold ${props.isShortViewport ? "py-2" : "py-3"} px-6 rounded-md text-lg w-11/12 `}>Rewrite</ButtonPart>
                                         </div>
-                                        <ButtonPart Click={handleSendForm} IdName="Rewrite" className="bg-custom-purple text-white font-bold py-3 px-6 rounded-md text-lg w-11/12 ">Rewrite</ButtonPart>
                                 </div>
                         </div>
                 </div>
