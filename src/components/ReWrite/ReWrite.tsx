@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import ImagePart from '../Shared/ImagePart/ImagePart';
+import React, { useState } from 'react';
 import { LanguageDrop, EngineDrop } from '@/Event/Event';
 import TextArea from '../Shared/TextArea/TextArea';
 import Dropdown from '../Shared/Dropdown/Dropdown';

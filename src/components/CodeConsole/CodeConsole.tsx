@@ -1,9 +1,7 @@
 import React from 'react';
-
 interface KeywordClassType {
   [key: string]: string;
 }
-
 export default function CodeConsole({ script }: { script: string }) {
   const isKeyword = (word: string): boolean => ['import', 'print'].includes(word);
   const keywordClass: KeywordClassType = { import: 'text-blue-500 mr-2', print: 'text-yellow-500' };
