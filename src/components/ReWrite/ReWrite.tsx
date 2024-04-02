@@ -56,7 +56,8 @@ export default function ReWrite(props: ReWriteProps) {
                                                 if (doneMarkerIndex !== -1) {
                                                         cleanJson = cleanJson.substring(0, doneMarkerIndex).trim();
                                                 }
-                                                if (cleanJson.startsWith('{')) {
+
+                                                if (isValidJsonString(cleanJson) && cleanJson.startsWith('{')) {
                                                         const dataObj = JSON.parse(cleanJson);
                                                         const deltaContents = dataObj.choices.map((choice: { delta: { content: any; }; }) => choice.delta.content).join(' ');
                                                         allDeltaContents.push(deltaContents);
@@ -69,6 +70,19 @@ export default function ReWrite(props: ReWriteProps) {
                                 props.setScript(tempContent);
                                 reader.read().then(processText);
                         });
+                }
+                function isValidJsonString(str: string) {
+                        const bracesAreBalanced = str.split('{').length === str.split('}').length;
+                        const quotesAreBalanced = (str.match(/"/g) || []).length % 2 === 0;
+                        if (!bracesAreBalanced || !quotesAreBalanced) {
+                                return false;
+                        }
+                        try {
+                                JSON.parse(str);
+                                return true;
+                        } catch (e) {
+                                return false;
+                        }
                 }
         };
         return (
