@@ -10,6 +10,12 @@ interface MainPartProps {
 export default function MainPart(props: MainPartProps) {
         const [script, setScript] = useState('');
         const [isShortViewport, setIsShortViewport] = useState(false);
+        const [displayedScript, setDisplayedScript] = useState('');
+        const [typingIndex, setTypingIndex] = useState(0);
+        const resetDisplay = () => {
+                setDisplayedScript('');
+                setTypingIndex(0);
+        };
         useEffect(() => {
                 const handleResize = () => {
                         if (window.innerHeight < 920) {
@@ -27,8 +33,8 @@ export default function MainPart(props: MainPartProps) {
                         <NavbarDash isHistoryVisible={props.isHistoryVisible} onClick={props.toggleHistoryWindow} />
                         <HeaderTitle Title="ReWrite" isShortViewport={isShortViewport} />
                         <div className="flex flex-1 ">
-                                <ReWrite setScript={setScript} isShortViewport={isShortViewport} />
-                                <CodeConsole script={script} />
+                                <ReWrite resetDisplay={resetDisplay} setScript={setScript} isShortViewport={isShortViewport} />
+                                <CodeConsole setTypingIndex={setTypingIndex} typingIndex={typingIndex} displayedScript={displayedScript} setDisplayedScript={setDisplayedScript} script={script} />
                         </div>
                 </div>
         );

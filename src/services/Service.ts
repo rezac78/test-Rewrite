@@ -1,11 +1,11 @@
 import axios from "../utils/axiosInstance";
-export const WriteText = async (
+export const streamWriteText = async (
   text: string,
   selectedLanguage: string,
-  tone?: string,
-  creativity?: string,
-  pointOfView?: string,
-  lengthDescription?: string
+  tone: string,
+  creativity: string,
+  pointOfView: string,
+  lengthDescription: string
 ) => {
   const prompt = `Write a ${lengthDescription} response in ${selectedLanguage}, with a ${tone} tone, and a ${creativity} level of creativity, from a ${pointOfView} point of view.\n\n${text}`;
 
@@ -18,24 +18,27 @@ export const WriteText = async (
     max_tokens: 2048,
     frequency_penalty: 0,
     messages: [
-      {
-        role: "system",
-        content: `You are a helpful assistant.`,
-      },
+      { role: "system", content: `You are a helpful assistant.` },
       { role: "user", content: "```" + prompt + "```" },
     ],
   };
 
   try {
-    const response = await axios.post("/chat/completions", requestBody, {
+    const response = await fetch("https://api.deepseek.com/v1/chat/completions", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer sk-d353d13fb9e94afa8beb597e99e09d8d`,
       },
+      body: JSON.stringify(requestBody),
     });
-    return response.data;
-  } catch (error: any) {
-    console.error("Error during API call:", error.message || error);
-    return error.response ? error.response : { error };
+
+    if (response.body) {
+      const reader = response.body.getReader();
+      return reader;
+    }
+  } catch (error) {
+    console.error("Error during API call:", error);
+    return null;
   }
 };

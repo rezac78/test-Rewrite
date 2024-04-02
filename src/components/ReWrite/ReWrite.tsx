@@ -5,7 +5,7 @@ import Dropdown from '../Shared/Dropdown/Dropdown';
 import ToggleButton from '../Shared/ToggleButton/ToggleButton';
 import AdvanceOptions from '../AdvanceOptions/AdvanceOptions';
 import ButtonPart from '../Shared/ButtonPart/ButtonPart';
-import { WriteText } from '@/services/Service';
+import { streamWriteText } from '@/services/Service';
 interface SelectedOptionsType {
         [key: string]: string;
 }
@@ -16,8 +16,9 @@ const initialState: SelectedOptionsType = {
         selectedPoint: 'Default',
 };
 interface ReWriteProps {
-        setScript: (value: string) => void;
+        setScript: any;
         isShortViewport: boolean;
+        resetDisplay: any;
 }
 export default function ReWrite(props: ReWriteProps) {
         const [text, setText] = useState('');
@@ -29,30 +30,45 @@ export default function ReWrite(props: ReWriteProps) {
         const [selectedOptions, setSelectedOptions] = useState<SelectedOptionsType>(initialState);
 
         const handleSendForm = async () => {
-                try {
-                        const data = await WriteText(text, selectedLanguage, selectedOptions.selectedVoice, selectedOptions.selectedCreativity, selectedOptions.selectedPoint, selectedOptions.selectedLeng);
-                        let allDeltaContents: any[] = [];
-                        const rawJsonStrings = data.split('data:').filter((str: string) => str.trim());
-                        rawJsonStrings.forEach((rawJson: string) => {
-                                try {
-                                        let cleanJson = rawJson.trim();
-                                        const doneMarkerIndex = cleanJson.indexOf('[DONE]');
-                                        if (doneMarkerIndex !== -1) {
-                                                cleanJson = cleanJson.substring(0, doneMarkerIndex).trim();
-                                        }
-                                        if (cleanJson.startsWith('{')) {
-                                                const dataObj = JSON.parse(cleanJson);
-                                                const deltaContents = dataObj.choices.map((choice: { delta: { content: any; }; }) => choice.delta.content).join(' ');
-                                                allDeltaContents.push(deltaContents);
-                                        }
-                                } catch (parseError) {
-                                        console.error('Error parsing a JSON string:', parseError, 'Raw JSON:', rawJson);
+                props.resetDisplay();
+                const reader = await streamWriteText(
+                        text,
+                        selectedLanguage,
+                        selectedOptions.selectedVoice,
+                        selectedOptions.selectedCreativity,
+                        selectedOptions.selectedPoint,
+                        selectedOptions.selectedLeng
+                );
+                let allDeltaContents: any[] = [];
+                if (reader) {
+                        reader.read().then(function processText({ done, value }) {
+                                if (done) {
+                                        const finalContent = allDeltaContents.join(' ');
+                                        props.setScript(finalContent);
+                                        return;
                                 }
+                                let chunkText = new TextDecoder().decode(value);
+                                const rawJsonStrings = chunkText.split('data:').filter(str => str.trim());
+                                rawJsonStrings.forEach(rawJson => {
+                                        try {
+                                                let cleanJson = rawJson.trim();
+                                                const doneMarkerIndex = cleanJson.indexOf('[DONE]');
+                                                if (doneMarkerIndex !== -1) {
+                                                        cleanJson = cleanJson.substring(0, doneMarkerIndex).trim();
+                                                }
+                                                if (cleanJson.startsWith('{')) {
+                                                        const dataObj = JSON.parse(cleanJson);
+                                                        const deltaContents = dataObj.choices.map((choice: { delta: { content: any; }; }) => choice.delta.content).join(' ');
+                                                        allDeltaContents.push(deltaContents);
+                                                }
+                                        } catch (parseError) {
+                                                console.error('Error parsing a JSON string:', parseError, 'Raw JSON:', rawJson);
+                                        }
+                                });
+                                const tempContent = allDeltaContents.join(' ');
+                                props.setScript(tempContent);
+                                reader.read().then(processText);
                         });
-                        const finalContent = allDeltaContents.join(' ');
-                        props.setScript(finalContent);
-                } catch (error) {
-                        console.error('Error handling form submission:', error);
                 }
         };
         return (
